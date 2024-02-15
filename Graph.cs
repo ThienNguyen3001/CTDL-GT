@@ -17,7 +17,7 @@ namespace CTDL_GT
             this.vertices = vertices;
             this.edges = edges;
             adjacencyList = new List<int>[vertices + 1];
-            for (int i = 0; i < vertices; i++)
+            for (int i = 1; i <= vertices; i++)
             {
                 adjacencyList[i] = new List<int>();
             }
@@ -83,7 +83,7 @@ namespace CTDL_GT
         }
         public void PrintTopo()
         {
-            for (int i = 0; i < vertices; i++)
+            for (int i = 1; i <= vertices; i++)
             {
                 if (!visited[i])
                 {
