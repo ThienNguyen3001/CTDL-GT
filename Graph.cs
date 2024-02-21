@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.SymbolStore;
 
 namespace CTDL_GT
 {
     public class Graph
     {
+        private int[] distance = new int[1000];
         private List<int>[] adjacencyList;
-        private List<Tuple<int, int>>[] adj;
-        public int vertices;
-        public int edges;
+        private List <Tuple<int,int, int>> adj = new List<Tuple<int, int, int>>();
+        private int vertices;
         private bool[] visited;
         private Stack<int> topo = new Stack<int>();
-        public Graph(int vertices, int edges)
+        public Graph(int vertices)
         {
             this.vertices = vertices;
-            this.edges = edges;
             adjacencyList = new List<int>[vertices + 1];
             for (int i = 1; i <= vertices; i++)
             {
@@ -29,13 +27,16 @@ namespace CTDL_GT
             adjacencyList[u].Add(v);
             adjacencyList[v].Add(u);
         }
+        /// <summary>
+        /// Dùng cho đồ thị có hướng nhưng ko có trọng số
+        /// </summary>
         public void AddDirEdge(int u, int v)
         {
             adjacencyList[u].Add(v);
         }
         public void AddDirWeightEdge(int u,int v,int w)
         {
-            adj[u].Add(Tuple.Create(v,w));
+            adj.Add(Tuple.Create(u, v, w)); 
         }
         public void PrintGraph()
         {
@@ -51,7 +52,7 @@ namespace CTDL_GT
         }
         public void DFS(int u)
         {
-            //Console.Write(u + " "); Dùng nếu dùng bfs thông thường
+            Console.Write(u + " "); //Dùng nếu dùng dfs thông thường
             visited[u] = true;
             foreach (var i in adjacencyList[u])
             {
@@ -60,7 +61,18 @@ namespace CTDL_GT
                     DFS(i);
                 }
             }
-            topo.Push(u);//dùng khi cần topo
+        }
+        private void DFS_Topo(int u)
+        {
+            visited[u] = true;
+            foreach (var i in adjacencyList[u])
+            {
+                if (!visited[i])
+                {
+                    DFS_Topo(i);
+                }
+            }
+            topo.Push(u);
         }
         public void BFS(int u)
         {
@@ -87,13 +99,64 @@ namespace CTDL_GT
             {
                 if (!visited[i])
                 {
-                    DFS(i);
+                    DFS_Topo(i);
                 }
             }
             foreach(int x in topo)
             {
                 Console.Write(x+" ");
             }
+            visited = new bool[vertices + 1];
+        }
+        public void BellmanFord(int x)
+        {
+            for (int i = 1; i <= vertices; i++)
+            {
+                distance[i] = 999999;
+            }
+            distance[x] = 0;
+            for (int i = 1; i <= vertices-1; i++)
+            {
+                foreach(var e in adj)
+                {
+                    int a, b, w;
+                    a = e.Item1;
+                    b = e.Item2;
+                    w = e.Item3;
+                    distance[b] = Math.Min(distance[b], distance[a] + w);
+                }
+            }
+            for (int i = 1; i <= vertices; i++)
+            {
+                if (distance[i] == 999999)
+                {
+                    Console.WriteLine($"No path from {x} to {i}");
+                }
+                else
+                {
+                    Console.Write($"Shortest path from {x} to {i}: ");
+                    List<int> path = new List<int>();
+                    int current = i;
+                    while (current != x)
+                    {
+                        path.Add(current);
+                        foreach (var e in adj)
+                        {
+                            int a = e.Item1;
+                            int b = e.Item2;
+                            int w = e.Item3;
+                            if (distance[current] == distance[a] + w && current == b)
+                            {
+                                current = a;
+                                break;
+                            }
+                        }
+                    }
+                    path.Add(x);
+                    path.Reverse();
+                    Console.WriteLine(string.Join(" ", path) + $" Cost: {distance[i]}");
+                }
+            }
         }
     }
-}
+}  

@@ -1,23 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="CTDL_GT.Node">
-    <Position X="4.5" Y="0.5" Width="1.5" />
+    <Position X="8.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIACAAAAAAAAAAgAA=</HashCode>
       <FileName>Node.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CTDL_GT.BinarySearchTree">
-    <Position X="6.75" Y="0.5" Width="1.5" />
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="InOrderHelper" Hidden="true" />
+      <Method Name="InsertHelper" Hidden="true" />
+      <Method Name="PostOrderHelper" Hidden="true" />
+      <Method Name="PreOrderHelper" Hidden="true" />
+      <Method Name="SearchHelper" Hidden="true" />
+    </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAEAQAAAAAAAAAEggAAAAAAAAAAAAAAAEAAAgAAA=</HashCode>
+      <HashCode>AAAACEASAAAAAAAAAEggAAAAAAAAAAAAAAAEACAgACA=</HashCode>
       <FileName>BinarySearchTree.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="CTDL_GT.Graph">
-    <Position X="2.5" Y="0.5" Width="1.5" />
+    <Position X="2.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>ACBAAAAAIIAAAAEAAABBABAAAAgUAAAAAAAgAAACAAA=</HashCode>
+      <HashCode>ACBAAAAAIAAAAAEAAABBABAAAEwUAAAAAAAgAAACAAA=</HashCode>
       <FileName>Graph.cs</FileName>
     </TypeIdentifier>
   </Class>

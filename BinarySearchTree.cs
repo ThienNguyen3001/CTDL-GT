@@ -10,7 +10,6 @@ namespace CTDL_GT
         {
             root = null;
         }
-
         public void Insert(Node node)
         {
             root = InsertHelper(root, node);
@@ -41,9 +40,37 @@ namespace CTDL_GT
         {
             if (root != null)
             {
-                PreOrderHelper(root.left);
                 Console.Write(root.value + " ");
+                PreOrderHelper(root.left);
                 PreOrderHelper(root.right);
+            }
+        }
+        public void InOrder()
+        {
+            InOrderHelper(root);
+        }
+
+        private void InOrderHelper(Node root)
+        {
+            if (root != null)
+            {
+                InOrderHelper(root.left);
+                Console.Write(root.value+" ");
+                InOrderHelper(root.right);
+            }
+        }
+        public void PostOrder()
+        {
+            PostOrderHelper(root);
+        }
+
+        private void PostOrderHelper(Node root)
+        {
+            if (root != null)
+            {
+                PostOrderHelper(root.left);
+                PostOrderHelper(root.right);
+                Console.Write(root.value + " ");
             }
         }
 
