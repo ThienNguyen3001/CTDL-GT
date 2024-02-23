@@ -22,6 +22,9 @@ namespace CTDL_GT
             //Khởi tạo tất cả các phần tử trong visited = false
             visited = new bool[vertices + 1];
         }
+        /// <summary>
+        /// Dùng cho đồ thị vô hướng
+        /// </summary>
         public void AddUnDirEdge(int u, int v)
         {
             adjacencyList[u].Add(v);
@@ -34,10 +37,16 @@ namespace CTDL_GT
         {
             adjacencyList[u].Add(v);
         }
-        public void AddDirWeightEdge(int u,int v,int w)
+        /// <summary>
+        /// Dùng cho đồ thị có hướng và có trọng số
+        /// </summary>
+        public void AddDirWeightEdge(int u, int v, int w)
         {
-            adj.Add(Tuple.Create(u, v, w)); 
+            adj.Add(Tuple.Create(u, v, w));
         }
+        /// <summary>
+        /// In đồ thị (Không có trọng số)
+        /// </summary>
         public void PrintGraph()
         {
             for (int i = 1; i <= vertices; i++)
@@ -50,10 +59,13 @@ namespace CTDL_GT
                 Console.WriteLine();
             }
         }
+        /// <summary>
+        /// In ra thuật toán tìm kiếm theo chiều sâu DFS
+        /// </summary>
         public void DFS(int u)
         {
-            Console.Write(u + " "); //Dùng nếu dùng dfs thông thường
             visited[u] = true;
+            Console.Write(u + " "); 
             foreach (var i in adjacencyList[u])
             {
                 if (!visited[i])
@@ -62,6 +74,9 @@ namespace CTDL_GT
                 }
             }
         }
+        /// <summary>
+        /// DFS cho Topo
+        /// </summary>
         private void DFS_Topo(int u)
         {
             visited[u] = true;
@@ -74,6 +89,9 @@ namespace CTDL_GT
             }
             topo.Push(u);
         }
+        /// <summary>
+        /// In ra thuật toán tìm kiếm theo chiều rộng BFS
+        /// </summary>
         public void BFS(int u)
         {
             Queue<int> q = new Queue<int>();
@@ -83,7 +101,7 @@ namespace CTDL_GT
             {
                 int x = q.Dequeue();
                 Console.Write(x + " ");
-                foreach(var i in adjacencyList[x])
+                foreach (var i in adjacencyList[x])
                 {
                     if (!visited[i])
                     {
@@ -93,6 +111,9 @@ namespace CTDL_GT
                 }
             }
         }
+        /// <summary>
+        /// In ra thứ tự sắp xếp Topo
+        /// </summary>
         public void PrintTopo()
         {
             for (int i = 1; i <= vertices; i++)
@@ -102,12 +123,14 @@ namespace CTDL_GT
                     DFS_Topo(i);
                 }
             }
-            foreach(int x in topo)
+            foreach (int x in topo)
             {
-                Console.Write(x+" ");
+                Console.Write(x + " ");
             }
-            visited = new bool[vertices + 1];
         }
+        /// <summary>
+        /// In ra thuật toán tìm đường đi ngắn nhất (Bellman Ford)
+        /// </summary>
         public void BellmanFord(int x)
         {
             for (int i = 1; i <= vertices; i++)
@@ -115,9 +138,9 @@ namespace CTDL_GT
                 distance[i] = 999999;
             }
             distance[x] = 0;
-            for (int i = 1; i <= vertices-1; i++)
+            for (int i = 1; i <= vertices - 1; i++)
             {
-                foreach(var e in adj)
+                foreach (var e in adj)
                 {
                     int a, b, w;
                     a = e.Item1;
@@ -126,6 +149,7 @@ namespace CTDL_GT
                     distance[b] = Math.Min(distance[b], distance[a] + w);
                 }
             }
+            // In kết quả
             for (int i = 1; i <= vertices; i++)
             {
                 if (distance[i] == 999999)

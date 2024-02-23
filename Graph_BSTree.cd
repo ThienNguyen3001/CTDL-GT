@@ -22,7 +22,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="CTDL_GT.Graph">
-    <Position X="2.5" Y="0.5" Width="1.75" />
+    <Position X="0.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>ACBAAAAAIAAAAAEAAABBABAAAEwUAAAAAAAgAAACAAA=</HashCode>
       <FileName>Graph.cs</FileName>

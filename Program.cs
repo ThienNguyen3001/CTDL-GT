@@ -23,13 +23,36 @@ namespace CTDL_GT
             //Console.WriteLine(bst.Search(5));
 
             Graph g = new Graph(5);
-            g.AddDirEdge(1, 2);
-            g.AddDirEdge(1, 3);
-            g.AddDirEdge(1, 4);
-            g.AddDirEdge(2, 3);
-            g.AddDirEdge(2, 5);
-            g.AddDirEdge(3, 5);
-            g.DFS(1);
+            //g.AddUnDirEdge(1,2);
+            //g.AddUnDirEdge(1, 3);
+            //g.AddUnDirEdge(1, 4);
+            //g.AddUnDirEdge(2, 5);
+            //g.AddUnDirEdge(2, 6);
+            //g.AddUnDirEdge(4, 7);
+            //g.AddUnDirEdge(4, 8);
+            //g.AddUnDirEdge(5, 9);
+            //g.AddUnDirEdge(5, 10);
+            //g.AddUnDirEdge(7, 11);
+            //g.AddUnDirEdge(7, 12);
+
+            //g.AddDirEdge(7, 6);
+            //g.AddDirEdge(7, 5);
+            //g.AddDirEdge(5, 4);
+            //g.AddDirEdge(6, 4);
+            //g.AddDirEdge(6, 3);
+            //g.AddDirEdge(5, 2);
+            //g.AddDirEdge(3, 1);
+            //g.AddDirEdge(2, 1);
+            //g.AddDirEdge(1, 8);
+
+            g.AddDirWeightEdge(1, 2, 6);
+            g.AddDirWeightEdge(1, 3, 5);
+            g.AddDirWeightEdge(3, 2, -2);
+            g.AddDirWeightEdge(3, 4, 4);
+            g.AddDirWeightEdge(3, 5, 3);
+            g.AddDirWeightEdge(2, 4, -1);
+            g.AddDirWeightEdge(4, 5, 3);
+            g.BellmanFord(1);
         }
     }
 }
